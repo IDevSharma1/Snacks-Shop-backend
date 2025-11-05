@@ -212,7 +212,7 @@ async function run() {
     process.exit(1);
   }
 
-  await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect(import.meta.env..MONGO_URI);
   await Category.deleteMany({});
   await Product.deleteMany({});
 

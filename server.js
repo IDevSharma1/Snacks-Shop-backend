@@ -8,11 +8,11 @@ const authRoutes = require("./routes/auth");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+app.use(cors({ origin: import.meta.env..CORS_ORIGIN, credentials: true }));
 
 let conn;
 async function connect() {
-  if (!conn) conn = mongoose.connect(process.env.MONGODB_URI, { dbName: "snackshop" });
+  if (!conn) conn = mongoose.connect(import.meta.env..MONGODB_URI, { dbName: "snackshop" });
   return conn;
 }
 app.use(async (_req, _res, next) => { await connect(); next(); });
