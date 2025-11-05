@@ -5,7 +5,7 @@ function verifyToken(req, res, next) {
   const token = header.startsWith("Bearer ") ? header.slice(7) : null;
   if (!token) return res.status(401).json({ message: "Unauthorized" });
   try {
-    const decoded = jwt.verify(token, import.meta.env..JWT_SECRET);
+    const decoded = jwt.verify(token, import.meta.env.JWT_SECRET);
     req.user = decoded; // { id, role }
     next();
   } catch {

@@ -209,7 +209,7 @@ const datasets = {
 async function run() {
   if (!Object.keys(datasets).length) {
     console.error("Please populate datasets object in seed.js");
-    process.exit(1);
+    import.meta.exit(1);
   }
 
   await mongoose.connect(import.meta.env..MONGO_URI);
@@ -247,4 +247,4 @@ async function run() {
   await mongoose.disconnect();
 }
 
-run().catch((e) => { console.error(e); process.exit(1); });
+run().catch((e) => { console.error(e); import.meta.exit(1); });

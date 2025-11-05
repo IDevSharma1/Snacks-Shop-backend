@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     const u = await User.create({ username, email, passwordHash, role });
 
     // Optional: auto-login
-    const token = jwt.sign({ id: u._id, role: u.role }, import.meta.env..JWT_SECRET, { expiresIn: "24h" });
+    const token = jwt.sign({ id: u._id, role: u.role }, import.meta.env.JWT_SECRET, { expiresIn: "24h" });
     res.status(201).json({ token, username: u.username, role: u.role });
   } catch (e) {
     res.status(400).json({ message: "Register failed" });
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id, role: user.role }, import.meta.env..JWT_SECRET, { expiresIn: "24h" });
+    const token = jwt.sign({ id: user._id, role: user.role }, import.meta.env.JWT_SECRET, { expiresIn: "24h" });
     res.json({ token, username: user.username, role: user.role });
   } catch {
     res.status(400).json({ message: "Login failed" });
