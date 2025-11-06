@@ -15,6 +15,8 @@ const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 app.use(express.json());
 
+// Root + health for convenience when opening the deployment URL
+app.get("/", (_req, res) => res.json({ ok: true, service: "snackshop-api" }));
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
