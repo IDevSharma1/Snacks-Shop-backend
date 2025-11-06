@@ -1,4 +1,3 @@
-// middleware/auth.cjs
 const jwt = require("jsonwebtoken");
 
 function verifyToken(req, res, next) {
@@ -7,7 +6,7 @@ function verifyToken(req, res, next) {
   if (!token) return res.status(401).json({ message: "Unauthorized" });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = decoded; // { id, role }
     next();
   } catch {
     res.status(401).json({ message: "Unauthorized" });
@@ -20,3 +19,5 @@ function verifyAdmin(req, res, next) {
 }
 
 module.exports = { verifyToken, verifyAdmin };
+
+

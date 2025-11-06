@@ -1,4 +1,3 @@
-// routes/auth.cjs
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -6,6 +5,7 @@ const User = require("../models/User.cjs");
 
 const router = express.Router();
 
+// Register
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password, adminKey } = req.body;
@@ -20,13 +20,15 @@ router.post("/register", async (req, res) => {
     const role = adminKey === "MAKE_ME_ADMIN" ? "ADMIN" : "USER";
     const u = await User.create({ username, email, passwordHash, role });
 
+    // Optional: auto-login
     const token = jwt.sign({ id: u._id, role: u.role }, process.env.JWT_SECRET, { expiresIn: "24h" });
     res.status(201).json({ token, username: u.username, role: u.role });
   } catch (e) {
-    res.status(400).json({ message: "Register failed", error: e.message });
+    res.status(400).json({ message: "Register failed" });
   }
 });
 
+// Login
 router.post("/login", async (req, res) => {
   try {
     const { emailOrUsername, password } = req.body;
@@ -43,9 +45,11 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "24h" });
     res.json({ token, username: user.username, role: user.role });
-  } catch (e) {
-    res.status(400).json({ message: "Login failed", error: e.message });
+  } catch {
+    res.status(400).json({ message: "Login failed" });
   }
 });
 
 module.exports = router;
+
+
