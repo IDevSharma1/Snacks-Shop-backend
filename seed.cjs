@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const Category = require("./models/Category");
-const Product = require("./models/Product");
+const Category = require("./models/Category.cjs");
+const Product = require("./models/Product.cjs");
 
 // Replace this with an imported JSON or paste the same object you shared
 const datasets = {
@@ -51,8 +51,7 @@ const datasets = {
     { name: 'Banana Bread', price: 5.49, description: 'Sweet bread with banana.', image: 'https://img.etimg.com/thumb/msid-122313594,width-480,height-360,imgsize-1407885,resizemode-75/banana-oat-pancakes.jpg', rating: 5, freshness: 'fresh' },
     { name: 'Mango Pudding', price: 4.99, description: 'Smooth mango dessert.', image: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1400&auto=format&fit=crop', rating: 4, freshness: 'cold' },
     { name: 'Jam Biscuits', price: 3.99, description: 'Biscuits filled with sweet jam.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMuLNyCpHkeg3PrNzvRGyv_4a7jmP0R0xKVQ&s', rating: 5, freshness: 'fresh' },
-    { name: 'Sugar Donut', price: 4.49, description: 'Light sugar sprinkle.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToeDpXnv4bUdMTVHXQYI95IBFQxXTwPcCPsA&s', rating: 4, freshness: 'fresh' },
-    { name: 'Peanut Brittle', price: 3.99, description: 'Crunchy sweet peanuts.', image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=1400&auto=format&fit=crop', rating: 5, freshness: 'fresh' },
+    { name: 'Sugar Donut', price: 4.49, description: 'Light sugar sprinkle.', image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=1400&auto=format&fit=crop', rating: 4, freshness: 'fresh' },
     { name: 'Fruit Chews', price: 2.49, description: 'Chewy fruit-flavored candies.', image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/06/orange-juice.webp', rating: 4, freshness: 'fresh' },
     { name: 'Raspberry Pie', price: 5.99, description: 'Sweet raspberry pie.', image: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1400&auto=format&fit=crop', rating: 4, freshness: 'fresh' },
     { name: 'Iced Donut', price: 5.99, description: 'Vanilla/frosted topping.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVYAb9l2oOQ4iRwqARLLwHoTuyZgY9RKT0Q&s', rating: 4, freshness: 'fresh' },
@@ -204,7 +203,6 @@ const datasets = {
     { name: 'Spicy Tuna', price: 10.59, description: 'Tuna with spicy mayo.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1400&auto=format&fit=crop', rating: 5, freshness: 'fresh' }
   ]
 };
- // <<< paste your datasets object here, e.g., require("./datasets.json")
 
 async function run() {
   if (!Object.keys(datasets).length) {
@@ -212,7 +210,7 @@ async function run() {
     process.exit(1);
   }
 
-  await mongoose.connect(process.env..MONGO_URI);
+  await mongoose.connect(process.env.MONGO_URI);
   await Category.deleteMany({});
   await Product.deleteMany({});
 
@@ -248,3 +246,5 @@ async function run() {
 }
 
 run().catch((e) => { console.error(e); process.exit(1); });
+
+

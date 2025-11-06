@@ -3,9 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const authRoutes = require("./routes/auth");
-const adminRoutes = require("./routes/admin");
-const publicRoutes = require("./routes/public");
+const authRoutes = require("./routes/auth.cjs");
+const adminRoutes = require("./routes/admin.cjs");
+const publicRoutes = require("./routes/public.cjs");
 
 const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
@@ -23,3 +23,5 @@ mongoose
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`API running on ${PORT}`));
+
+

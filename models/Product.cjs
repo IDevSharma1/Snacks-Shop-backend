@@ -1,5 +1,4 @@
-// backend/models/Product.js
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -15,5 +14,6 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema);
-export default Product;
+module.exports = mongoose.model("Product", ProductSchema);
+
+
